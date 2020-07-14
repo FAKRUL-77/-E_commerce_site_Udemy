@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+    Product Detail
+{% block content %}
+    <div class="container" style="height:400px;width:430px">
+
+        {% if object.image %}
+            <img src="{{ object.image.url }}" alt="" width="300" height="333">
+        {% endif %}
+        <h6>Title: {{ object.title }}</h6>
+        <h6>Description: {{ object.description }} </h6>
+    </div>
+{% endblock %}

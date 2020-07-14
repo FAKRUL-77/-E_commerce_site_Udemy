@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Product List
+{% endblock %}
+
+{% block content %}
+    {% for obj in object_list %}
+        <li>{{ obj.title }}</li>
+        <br>
+    {% endfor %}
+{% endblock %}
