@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import TextInput, PasswordInput
@@ -30,3 +30,12 @@ class CustomerSignUpForm(UserCreationForm):
     #     if commit:
     #         user.save()
     #     return user
+
+
+class CustomerLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'class': 'form-control',
+                                                       'id': 'username',
+                                                       }))
+    password = forms.CharField(widget=PasswordInput(attrs={'class': 'form-control',
+                                                           'id': 'password',
+                                                           }))

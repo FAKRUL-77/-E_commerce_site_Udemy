@@ -2,6 +2,8 @@ import os
 import random
 from django.db.models.signals import pre_save
 from django.db import models
+from django.utils import timezone
+
 from .utils import unique_slug_generator
 
 
@@ -52,8 +54,12 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = ProductManager()
+
+    # def get_absolute_url(self):
+    #     return "{{slug}}/".format(slug=self.slug)
 
     def __str__(self):
         return self.title

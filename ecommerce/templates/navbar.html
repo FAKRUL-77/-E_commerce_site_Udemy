@@ -1,26 +1,48 @@
 <header>
-    <nav class="navbar navbar-expand-md fixed-top py-2 text-light" style="background-color: black">
-        <a class="navbar-brand ml-4 mr-5 text-light" href="{% url 'home' %}">CRUD</a>
-        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand ml-4 mr-2 text-light" href="{% url 'product_list' %}">e-Commerce</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse " style="height: 1px" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link text-light" href="#">Link1</a></li>
-                <li class="nav-item"><a class="nav-link text-light" href="#">Link2</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="#">Contact</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="{% url 'product_list' %}">Product</a></li>
+
+                 <li class="nav-item dropdown">
+                    <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+
             </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
             <ul class="navbar-nav mr-2">
 
                 {% if not user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">  Login </a>
+                        <a class="nav-link text-light" href="{% url 'login' %}">  Login </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{% url 'register' %}">  Signup </a>
                     </li>
                 {% else %}
-                    <li class="nav-item">
-                        <p class="nav-link">{{ user.email }}</p>
+                    <li class="nav-item mt-3 ml-5">
+                        <p class="nav-link text-light">{{ user.email }}</p>
                     </li>
                     <li class="nav-item">
                         {% if user.is_student == True %}
@@ -28,10 +50,9 @@
                         {% elif user.is_admin == True %}
                             <a class="nav-link text-light" href="#"> Profile</a>
                         {% endif %}
-
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'logout' %}"> Logout </a>
+                        <a class="nav-link text-light mt-3" href="{% url 'logout' %}"> Logout </a>
                     </li>
                 {% endif %}
             </ul>

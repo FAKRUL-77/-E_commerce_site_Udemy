@@ -1,16 +1,17 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db import transaction
 from django.shortcuts import render, redirect
-from .forms import CustomerSignUpForm
+from .forms import CustomerSignUpForm, CustomerLoginForm
 from .models import Customer
 
 # Create your views here.
 from django.views.generic import CreateView
 
 
-class StudentSignUpView(CreateView):
+class CustomerSignUpView(CreateView):
     model = User
     form_class = CustomerSignUpForm
     template_name = 'customer/customer_signup_form.html'
@@ -36,6 +37,13 @@ class StudentSignUpView(CreateView):
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return redirect('home')
+
+
+class CustomerLoginView(SuccessMessageMixin, LoginView):
+    form_class = CustomerLoginForm
+    redirect_authenticated_user = True
+    template_name = 'customer/login_form.html'
+    success_message = 'You are successfully logged in'
 
 
 class CustomerLogoutView(LogoutView):
